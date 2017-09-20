@@ -28,10 +28,10 @@ router.get('/:term', function(req, res, next) {
         count: 10 ,
         offset: 0
       }, function(err, response, body) {
-        var bingResult = [];
         if(err){
           res.render('error');
         }
+        var bingResult = [];
         body.value.map(function(val) {
           bingResult.push({
             url: val.contentUrl,
@@ -47,10 +47,10 @@ router.get('/:term', function(req, res, next) {
         count: 10 ,
         offset: 2 * offset
       }, function(err, response, body) {
-        var bingResult = [];
         if(err){
           res.render('error');
         }
+        var bingResult = [];
         body.value.map(function(val) {
           bingResult.push({
             url: val.contentUrl,
