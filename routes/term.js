@@ -29,7 +29,7 @@ router.get('/:term', function(req, res, next) {
         offset: 0
       }, function(err, response, body) {
         var bingResult = [];
-        for(var i = 0; i < 10; i++){
+        for(var i = 0; i < body.value.length; i++){
           bingResult.push({
             url: body.value[i].contentUrl,
             snippet: body.value[i].name,
