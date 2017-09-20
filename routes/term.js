@@ -29,14 +29,14 @@ router.get('/:term', function(req, res, next) {
         offset: 0
       }, function(err, response, body) {
         var bingResult = [];
-        for(var i = 0; i < 10; i++){
+        body.value.map(function(val) {
           bingResult.push({
-            url: body.value[i].contentUrl,
-            snippet: body.value[i].name,
-            thumbnail: body.value[i].thumbnailUrl,
-            context: body.value[i].hostPageUrl
-          });
-        }
+            url: val.contentUrl,
+            snippet: val.name,
+            thumbnail: val.thumbnailUrl,
+            context: val.hostPageUrl
+          })
+        });
         res.json(bingResult);
       });
     }else if(offset>1){
@@ -45,14 +45,14 @@ router.get('/:term', function(req, res, next) {
         offset: 2 * offset
       }, function(err, response, body) {
         var bingResult = [];
-        for(var i = 0; i < 10; i++){
+        body.value.map(function(val) {
           bingResult.push({
-            url: body.value[i].contentUrl,
-            snippet: body.value[i].name,
-            thumbnail: body.value[i].thumbnailUrl,
-            context: body.value[i].hostPageUrl
-          });
-        }
+            url: val.contentUrl,
+            snippet: val.name,
+            thumbnail: val.thumbnailUrl,
+            context: val.hostPageUrl
+          })
+        });
         res.json(bingResult);
       });
     }
