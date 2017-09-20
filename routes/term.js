@@ -29,13 +29,14 @@ router.get('/:term', function(req, res, next) {
         offset: 0
       }, function(err, response, body) {
         var bingResult = [];
-        for(var i = 0; i < body.value.length; i++){
-          bingResult.push({
+        for(var i = 0; i < 10; i++){
+          var toPush = {
             url: body.value[i].contentUrl,
             snippet: body.value[i].name,
             thumbnail: body.value[i].thumbnailUrl,
             context: body.value[i].hostPageUrl
-          });
+          }  
+          bingResult.push(toPush);
         }
         res.json(bingResult);
       });
@@ -46,12 +47,13 @@ router.get('/:term', function(req, res, next) {
       }, function(err, response, body) {
         var bingResult = [];
         for(var i = 0; i < 10; i++){
-          bingResult.push({
+          var toPush = {
             url: body.value[i].contentUrl,
             snippet: body.value[i].name,
             thumbnail: body.value[i].thumbnailUrl,
             context: body.value[i].hostPageUrl
-          });
+          }  
+          bingResult.push(toPush);
         }
         res.json(bingResult);
       });
