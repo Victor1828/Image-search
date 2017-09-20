@@ -9,6 +9,7 @@ var dotenv = require('dotenv');
 
 var index = require('./routes/index');
 var recent = require('./routes/recent');
+var term = require('./routes/term');
 
 //connect to database
 dotenv.config();
@@ -30,6 +31,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/api/recentsearch', recent);
+app.use('/api/imagesearch', term);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
