@@ -30,13 +30,12 @@ router.get('/:term', function(req, res, next) {
       }, function(err, response, body) {
         var bingResult = [];
         for(var i = 0; i < 10; i++){
-          var toPush = {
-            url: body.value[i].contentUrl,
-            snippet: body.value[i].name,
-            thumbnail: body.value[i].thumbnailUrl,
-            context: body.value[i].hostPageUrl
-          }  
-          bingResult.push(toPush);
+          bingResult.push({
+            url: body.value[0].contentUrl,
+            snippet: body.value[0].name,
+            thumbnail: body.value[0].thumbnailUrl,
+            context: body.value[0].hostPageUrl
+          });
         }
         res.json(bingResult);
       });
@@ -47,13 +46,12 @@ router.get('/:term', function(req, res, next) {
       }, function(err, response, body) {
         var bingResult = [];
         for(var i = 0; i < 10; i++){
-          var toPush = {
-            url: body.value[i].contentUrl,
-            snippet: body.value[i].name,
-            thumbnail: body.value[i].thumbnailUrl,
-            context: body.value[i].hostPageUrl
-          }  
-          bingResult.push(toPush);
+          bingResult.push({
+            url: body.value[0].contentUrl,
+            snippet: body.value[0].name,
+            thumbnail: body.value[0].thumbnailUrl,
+            context: body.value[0].hostPageUrl
+          });
         }
         res.json(bingResult);
       });
