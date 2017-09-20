@@ -29,15 +29,17 @@ router.get('/:term', function(req, res, next) {
         offset: 0
       }, function(err, response, body) {
         var bingResult = [];
-        for(var i = 0; i < 10; i++){
-          bingResult.push({
-            url: body.value[0].contentUrl,
-            snippet: body.value[0].name,
-            thumbnail: body.value[0].thumbnailUrl,
-            context: body.value[0].hostPageUrl
-          });
+        bingResult.push(body);
+        var result = [];
+        for(var i=0; i<10; i++){
+            result.push({
+                url: bingResult.value[i].contentUrl,
+                snippet: bingResult.value[i].name,
+                thumbnail: bingResult.value[i].thumbnailUrl,
+                context: bingResult.value[i].hostPageUrl
+            });
         }
-        res.json(bingResult);
+        res.json(result);
       });
     }else if(offset>1){
       bing.images(image, {
