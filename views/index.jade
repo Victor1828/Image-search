@@ -8,7 +8,12 @@ block content
     li I can paginate through the responses by adding a ?offset=2 parameter to the URL.
     li I can get a list of the most recently submitted search strings.
   ul
+  h2 Expected output:
+  code {url: "https://www.bing.com/cr?IG=42CBCF4B...", snippet: "freeCodeCamp – Medium", thumbnail: "https://tse3.mm.bing.net/th?id=OIP.Pqn9...", context: "https://www.bing.com/cr?IG=42CBCF4B..."}
+  h2 Search:
   section(ng-controller='imageCtrl')
-    input(ng-model='imageToSearch' onkeypress="if (event.which==13) document.querySelector('a').click()") 
+    input(placeholder='What are you looking for?' ng-model='imageToSearch' onkeypress="if (event.which==13) document.querySelector('a').click()") 
     button
-      a(href='api/imagesearch/{{imageToSearch}}')="Search" 
+      a(href='api/imagesearch/{{imageToSearch}}')="Search"    
+      button
+        a(href='api/recentsearch')="Check for recent search"    

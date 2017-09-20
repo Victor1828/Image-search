@@ -4,9 +4,15 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
+var dotenv = require('dotenv');
 
 var index = require('./routes/index');
-var users = require('./routes/users');
+var recent = require('./routes/recent');
+
+//connect to database
+dotenv.config();
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/searchImages')
 
 var app = express();
 
@@ -23,7 +29,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
-app.use('/users', users);
+app.use('/api/recentsearch', recent);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
