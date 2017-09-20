@@ -29,17 +29,15 @@ router.get('/:term', function(req, res, next) {
         offset: 0
       }, function(err, response, body) {
         var bingResult = [];
-        bingResult.push(body);
-        var result = [];
-        for(var i=0; i<10; i++){
-            result.push({
-                url: bingResult.value[i].contentUrl,
-                snippet: bingResult.value[i].name,
-                thumbnail: bingResult.value[i].thumbnailUrl,
-                context: bingResult.value[i].hostPageUrl
-            });
+        for(var i = 0; i < 10; i++){
+          bingResult.push({
+            url: body.value[i].contentUrl,
+            snippet: body.value[i].name,
+            thumbnail: body.value[i].thumbnailUrl,
+            context: body.value[i].hostPageUrl
+          });
         }
-        res.json(result);
+        res.json(bingResult);
       });
     }else if(offset>1){
       bing.images(image, {
@@ -49,10 +47,10 @@ router.get('/:term', function(req, res, next) {
         var bingResult = [];
         for(var i = 0; i < 10; i++){
           bingResult.push({
-            url: body.value[0].contentUrl,
-            snippet: body.value[0].name,
-            thumbnail: body.value[0].thumbnailUrl,
-            context: body.value[0].hostPageUrl
+            url: body.value[i].contentUrl,
+            snippet: body.value[i].name,
+            thumbnail: body.value[i].thumbnailUrl,
+            context: body.value[i].hostPageUrl
           });
         }
         res.json(bingResult);
