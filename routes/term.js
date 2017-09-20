@@ -56,6 +56,6 @@ router.get('/:term', function(req, res, next) {
         res.json(bingResult);
       });
     }
-  });
+});
 
-  module.exports = router;
+module.exports = router;
