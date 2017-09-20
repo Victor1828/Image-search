@@ -28,18 +28,18 @@ router.get('/:term', function(req, res, next) {
         count: 10 ,
         offset: 0
       }, function(err, response, body) {
+        var bingResult = [];
         if(err){
           res.render('error');
         }
-        var bingResult = [];
-        body.value.map(function(val) {
+        for(var i = 0; i < 10; i++){
           bingResult.push({
-            url: val.contentUrl,
-            snippet: val.name,
-            thumbnail: val.thumbnailUrl,
-            context: val.hostPageUrl
-          })
-        });
+            url: body.value[i].contentUrl,
+            snippet: body.value[i].name,
+            thumbnail: body.value[i].thumbnailUrl,
+            context: body.value[i].hostPageUrl
+          });
+        }
         res.json(bingResult);
       });
     }else if(offset>1){
@@ -47,18 +47,18 @@ router.get('/:term', function(req, res, next) {
         count: 10 ,
         offset: 2 * offset
       }, function(err, response, body) {
+        var bingResult = [];
         if(err){
           res.render('error');
         }
-        var bingResult = [];
-        body.value.map(function(val) {
+        for(var i = 0; i < 10; i++){
           bingResult.push({
-            url: val.contentUrl,
-            snippet: val.name,
-            thumbnail: val.thumbnailUrl,
-            context: val.hostPageUrl
-          })
-        });
+            url: body.value[i].contentUrl,
+            snippet: body.value[i].name,
+            thumbnail: body.value[i].thumbnailUrl,
+            context: body.value[i].hostPageUrl
+          });
+        }
         res.json(bingResult);
       });
     }
