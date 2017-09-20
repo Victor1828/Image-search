@@ -29,6 +29,9 @@ router.get('/:term', function(req, res, next) {
         offset: 0
       }, function(err, response, body) {
         var bingResult = [];
+        if(err){
+          res.render('error');
+        }
         body.value.map(function(val) {
           bingResult.push({
             url: val.contentUrl,
@@ -45,6 +48,9 @@ router.get('/:term', function(req, res, next) {
         offset: 2 * offset
       }, function(err, response, body) {
         var bingResult = [];
+        if(err){
+          res.render('error');
+        }
         body.value.map(function(val) {
           bingResult.push({
             url: val.contentUrl,
