@@ -31,7 +31,7 @@ router.get('/:term', function(req, res, next) {
         var bingResult = [];
         var info = JSON.parse(response.body);
         if(err){
-          return next(error);
+          return next(err);
         }
         info.value.map(function(val) {
           bingResult.push({
@@ -51,7 +51,7 @@ router.get('/:term', function(req, res, next) {
         var bingResult = [];
         var info = JSON.parse(response.body);
         if(err){
-          return next(error);
+          return next(err);
         }
         info.value.map(function(val) {
           bingResult.push({
