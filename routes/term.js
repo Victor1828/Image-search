@@ -23,25 +23,47 @@ router.get('/:term', function(req, res, next) {
     });
   
     // bing api
-    bing.images(image, {
-      count: 10 ,
-      offset: 0
-    }, function(err, response, body) {
-      var bingResult = [];
-      if(err){
-        res.render('error');
-      }
-      body.value.map(function(val) {
-        bingResult.push({
-          url:val.contentUrl,
-          snippet: val.name,
-          thumbnail: val.thumbnailUrl,
-          context: val.hostPageUrl
+    if(!offset){
+      bing.images(image, {
+        count: 10 ,
+        offset: 0
+      }, function(err, response, body) {
+        var bingResult = [];
+        var info = JSON.parse(response.body);
+        if(err){
+          res.render('error');
+        }
+        info.value.map(function(val) {
+          bingResult.push({
+            url:val.contentUrl,
+            snippet: val.name,
+            thumbnail: val.thumbnailUrl,
+            context: val.hostPageUrl
+          });
         });
+        res.json(bingResult);
       });
-      res.json(bingResult);
-    });
-    
+    }else if(offset>1){
+      bing.images(image, {
+        count: 10 ,
+        offset: 2 * offset
+      }, function(err, response, body) {
+        var bingResult = [];
+        var info = JSON.parse(response.body);
+        if(err){
+          res.render('error');
+        }
+        info.value.map(function(val) {
+          bingResult.push({
+            url:val.contentUrl,
+            snippet: val.name,
+            thumbnail: val.thumbnailUrl,
+            context: val.hostPageUrl
+          });
+        });
+        res.json(bingResult);
+      });
+    }
 });
 
 module.exports = router;
