@@ -23,46 +23,32 @@ router.get('/:term', function(req, res, next) {
     });
   
     // bing api
+
+    function api (skip) {
+      bing.images(image, {
+        count: 10 ,
+        offset: 2 * skip
+      }, function(err, response, body) {
+        var bingResult = [];
+        if(err){
+          return next(err);
+        }
+        body.value.map(function(val) {
+          bingResult.push({
+            url:val.contentUrl,
+            snippet: val.name,
+            thumbnail: val.thumbnailUrl,
+            context: val.hostPageUrl
+          });
+        });
+        res.json(bingResult);
+      });
+    }
+
     if(!offset){
-      bing.images(image, {
-        count: 10 ,
-        offset: 0
-      }, function(err, response, body) {
-        var bingResult = [];
-        var info = JSON.parse(response.body);
-        if(err){
-          return next(err);
-        }
-        info.value.map(function(val) {
-          bingResult.push({
-            url:val.contentUrl,
-            snippet: val.name,
-            thumbnail: val.thumbnailUrl,
-            context: val.hostPageUrl
-          });
-        });
-        res.json(bingResult);
-      });
+      api(0);
     }else if(offset>1){
-      bing.images(image, {
-        count: 10 ,
-        offset: 2 * offset
-      }, function(err, response, body) {
-        var bingResult = [];
-        var info = JSON.parse(response.body);
-        if(err){
-          return next(err);
-        }
-        info.value.map(function(val) {
-          bingResult.push({
-            url:val.contentUrl,
-            snippet: val.name,
-            thumbnail: val.thumbnailUrl,
-            context: val.hostPageUrl
-          });
-        });
-        res.json(bingResult);
-      });
+      api(offset);
     }
 });
 
