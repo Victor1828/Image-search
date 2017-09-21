@@ -23,8 +23,7 @@ router.get('/:term', function(req, res, next) {
     });
   
     // bing api
-
-    function api (skip) {
+    function bingApi (skip) {
       bing.images(image, {
         count: 10 ,
         offset: 2 * skip
@@ -46,9 +45,9 @@ router.get('/:term', function(req, res, next) {
     }
 
     if(!offset){
-      api(0);
+      bingApi(0);
     }else if(offset>1){
-      api(offset);
+      bingApi(offset);
     }
 });
 
